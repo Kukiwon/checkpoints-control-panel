@@ -1,0 +1,44 @@
+<div class="container" ng-init="init()">
+	<button class="btn btn-default pull-right" ng-click="createCheckpoint()">Create Checkpoint</button>
+	<h1>{{project.name}} <span style="color:red">[{{project.id}}]</span></h1>
+	<hr>
+	<p>
+		Now that you have created a project, you need to initialize it in the SDK to start tracking Check Points.
+		In the iOS SDK, add the following line of code to your project:
+	</p>
+	<pre>[[NPSCheckpoints SDK] initWithUsername:@"test@example.com" andPassword:@"test" andProjectId:@"{{project.id}}"];</pre>
+
+	<h2>Checkpoints</h2>
+	<table class="table table-striped">
+		<tr>
+			<th>ID</th>
+			<th>Checkpoint</th>
+			<th>Created</th>
+		</tr>
+		<tr ng-repeat="checkpoint in project.checkPoints | orderBy:'id'">
+			<td style="color:red;">{{checkpoint.id}}</td>
+			<td>{{checkpoint.name}}</td>
+			<td>{{checkpoint.created | date:'short'}}
+		</tr>
+	</table>
+	<h2>Sessions</h2>
+	<table class="table table-striped">
+		<tr>
+			<th>Session Identifier</th>
+			<th>Checkpoint</th>
+			<th>Created</th>
+		</tr>
+		<tbody ng-repeat="session in project.sessions | orderBy:'id'">
+			<tr>
+				<td>{{session.identifier}}</td>
+				<td></td>
+				<td>{{session.created | date:'medium'}}
+			</tr>
+			<tr ng-repeat="sessionCheckPoint in session.sessionCheckPoints">
+				<td></td>
+				<td>{{sessionCheckPoint.checkPoint.name}}</td>
+				<td>{{sessionCheckPoint.created | date:'medium'}}</td>
+			</tr>
+		</td>
+	</table>
+</div>

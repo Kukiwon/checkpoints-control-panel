@@ -1,5 +1,6 @@
-angular.module "checkpoints", ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'lbServices']
-  .config ($stateProvider, $urlRouterProvider) ->
+angular.module "checkpoints", ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
+'ngResource', 'ui.router', 'ui.bootstrap', 'lbServices']
+  .config ($stateProvider, $urlRouterProvider, LoopBackResourceProvider, $httpProvider) ->
     $stateProvider
       .state "home",
         url: "/",
@@ -16,5 +17,34 @@ angular.module "checkpoints", ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize'
       	url: "/sign-in",
       	templateUrl: "app/sign-in/sign-in.html",
       	controller: "SignInCtrl"
+      .state "projects",
+        url: "/projects",
+        templateUrl: "app/projects/projects.html",
+        controller: "ProjectsCtrl"
+      .state "create-project",
+        url: "/projects/create",
+        templateUrl: "app/projects/create-project.html",
+        controller: "ProjectCtrl"
+      .state "view-project",
+        url: "/project/:projectId",
+        templateUrl: "app/projects/project.html",
+        controller: "ProjectCtrl"
+      .state "create-checkpoint",
+        url: "/project/:projectId/checkpoints/create",
+        templateUrl: "app/checkpoints/create.html",
+        controller: "CheckpointCtrl"
+
+    LoopBackResourceProvider.setUrlBase 'http://localhost:3030/api'
 
     $urlRouterProvider.otherwise '/'
+
+    $httpProvider.interceptors.push ($q, $location) ->
+      {
+        responseError: (rejection) ->
+          if (rejection.status == 401)
+            $location.nextAfterLogin = $location.path()
+            $location.path('/sign-in')
+          $q.reject(rejection)
+      }
+    
+  .run () ->

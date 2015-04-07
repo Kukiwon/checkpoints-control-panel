@@ -1,0 +1,26 @@
+<div class="container" ng-init="init()">
+	<button class="btn btn-default pull-right" ng-click="create()">Create Project</button>
+	<h1>Projects</h1>
+	<hr>
+	<table class="table table-striped">
+		<tr>
+			<th>Project ID</th>
+			<th>Project name</th>
+			<th>Created</th>
+			<th># Checkpoints</th>
+			<th># Sessions</th>
+			<th style="width: 100px;"></th>
+		</tr>
+		<tr ng-repeat="project in projects | orderBy:'id'">
+			<td>{{project.id}}</td>
+			<td>{{project.name}}</td>
+			<td>{{project.created | date:'short'}}</td>
+			<td>{{project.checkPoints.length}}</td>
+			<td>{{project.sessions.length}}</td>
+			<td>
+				<button class="btn btn-default" ng-click="view(project)"><i class="glyphicon glyphicon-eye-open"></i></button>
+				<button class="btn btn-danger" ng-click="delete(project)"><i class="glyphicon glyphicon-trash"></i></button>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -5,3 +5,4 @@ angular.module "checkpoints"
       AuthService.register user.email, user.password
       .then () ->
         $state.go 'sign-up-complete'
+      .catch (e) ->

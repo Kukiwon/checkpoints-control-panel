@@ -2,17 +2,22 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#/">
-        <span class="glyphicon glyphicon-home"></span> Checkpoints
+        <span class="glyphicon glyphicon-screenshot"></span> Checkpoints
       </a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" ng-if="isAuthenticated">
+        <li><a ng-href="#/projects">Projects</a></li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul ng-if="!isAuthenticated" class="nav navbar-nav navbar-right">
         <li><a ng-href="#/sign-up">Sign Up</a></li>
         <li><a ng-href="#/sign-in">Sign in</a></li>
+      </ul>
+      <ul ng-if="isAuthenticated" class="nav navbar-nav navbar-right">
+        <li><a ng-href="#">{{user.email}}</a></li>
+        <li><a ng-href="#" ng-click="logOut()">Log Out</a></li>
       </ul>
     </div>
   </div>
