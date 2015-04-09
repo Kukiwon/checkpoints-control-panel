@@ -8,7 +8,6 @@ angular.module "checkpoints"
     	$scope.projects = Developer.projects id: Developer.getCurrentId(), filter:
         include: ['checkPoints', 'sessions']
 
-
     $scope.view = (project) ->
     	$state.go 'view-project', projectId: project.id
 

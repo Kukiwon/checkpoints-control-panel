@@ -1,5 +1,5 @@
 angular.module "checkpoints", ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
-'ngResource', 'ui.router', 'ui.bootstrap', 'lbServices']
+'ngResource', 'ui.router', 'ui.bootstrap', 'lbServices', 'LocalStorageModule']
   .config ($stateProvider, $urlRouterProvider, LoopBackResourceProvider, $httpProvider) ->
     $stateProvider
       .state "home",
@@ -34,7 +34,8 @@ angular.module "checkpoints", ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize'
         templateUrl: "app/checkpoints/create.html",
         controller: "CheckpointCtrl"
 
-    LoopBackResourceProvider.setUrlBase 'http://localhost:8081/api'
+    LoopBackResourceProvider.setUrlBase 'http://checkpoints.elasticbeanstalk.com/api'
+    #LoopBackResourceProvider.setUrlBase 'http://localhost:8081/api'
     #LoopBackResourceProvider.setUrlBase '/api'
 
     $urlRouterProvider.otherwise '/'

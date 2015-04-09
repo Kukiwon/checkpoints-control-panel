@@ -8,9 +8,20 @@
 		In the iOS SDK, add the following line of code to your project:
 	</p>
 	<pre>[[NPSCheckpoints SDK] initWithUsername:@"test@example.com" andPassword:@"test" andProjectId:@"{{project.id}}"];</pre> -->
-
-	<h2>Checkpoints</h2>
-	<table class="table table-striped">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Checkpoints</h2>
+		</div>
+		<div class="col-md-6">
+			<button class="btn btn-default pull-right" ng-click="toggleShowCheckPoints()">
+				<i class="fa" ng-class="{'fa-eye-slash': showCheckPoints, 'fa-eye': !showCheckPoints}"></i> 
+				<span ng-if="showCheckPoints">Hide</span>
+				<span ng-if="!showCheckPoints">Show</span>
+			</button>
+		</div>
+	</div>
+	
+	<table class="table table-striped" ng-show="showCheckPoints">
 		<tr>
 			<th>ID</th>
 			<th>Checkpoint</th>
@@ -29,27 +40,40 @@
 			<td colspan="10">No checkpoints found. Define a new Checkpoint by clicking 'Create Checkpoint' in the upper right corner.</td>
 		</tr>
 	</table>
-	<h2>Sessions</h2>
-	<table class="table table-striped" ng-class="{disabled: !project.sessions.length}">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Sessions</h2>
+		</div>
+		<div class="col-md-6">
+			<div class="btn-group pull-right" role="group" aria-label="...">
+		 		<button type="button" class="btn btn-default" ng-click="toggleShowLastOnly()">
+		 			<i class="fa fa-check" ng-if="showLastOnly"></i>
+		 			Show Last Checkpoint only
+		 		</button>
+			</div>
+		</div>
+	</div>
+	<table class="table table-default" ng-class="{disabled: !project.sessions.length}">
 		<tr>
 			<th>Session Identifier</th>
 			<th>Checkpoint</th>
 			<th>Created</th>
 			<th style="width: 100px;"></th>
 		</tr>
-		<tbody ng-repeat="session in project.sessions | orderBy:'id'">
+		<tbody ng-repeat="session in project.sessions | orderBy:'-id'">
 			<tr>
 				<td>{{session.identifier}}</td>
-				<td></td>
+				<td style="color: grey;">{{session.sessionCheckPoints.length}} checkpoint(s)</td>
 				<td>{{session.created | date:'medium'}}</td>
 				<td>
+					<button class="btn btn-default" ng-click="toggleShowAll(session)" ng-disabled="session.sessionCheckPoints.length <= 1"><i class="fa" ng-class="{'fa-compress': session.showAll, 'fa-expand': !session.showAll}"></i></button>
 					<button class="btn btn-danger" ng-click="deleteSession(session)"><i class="glyphicon glyphicon-trash"></i></button>
 				</td>
 			</tr>
-			<tr ng-repeat="sessionCheckPoint in session.sessionCheckPoints">
+			<tr ng-repeat="sessionCheckPoint in session.sessionCheckPoints | orderBy:'millis'" ng-show="showLastOnly ? $index === session.sessionCheckPoints.length - 1 || sessionsShowingAll[session.id] : true">
 				<td></td>
-				<td>{{sessionCheckPoint.checkPoint.name}}</td>
-				<td>{{sessionCheckPoint.created | date:'medium'}}</td>
+				<td style="font-style: italic;">{{sessionCheckPoint.checkPoint.name}}</td>
+				<td>{{sessionCheckPoint.created | date:'HH:mm:ss'}}</td>
 				<td></td>
 			</tr>
 		</td>

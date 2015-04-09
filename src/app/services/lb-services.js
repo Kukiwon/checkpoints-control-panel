@@ -3094,6 +3094,12 @@ module.factory(
           method: "POST"
         },
 
+        // INTERNAL. Use Project.developer() instead.
+        "::get::Project::developer": {
+          url: urlBase + "/Projects/:id/developer",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Developer#getCurrent
@@ -3864,6 +3870,12 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Project.developer() instead.
+        "prototype$__get__developer": {
+          url: urlBase + "/Projects/:id/developer",
+          method: "GET"
+        },
+
         // INTERNAL. Use Project.checkPoints.findById() instead.
         "prototype$__findById__checkPoints": {
           url: urlBase + "/Projects/:id/checkPoints/:fk",
@@ -4475,6 +4487,42 @@ module.factory(
     */
     R.modelName = "Project";
 
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Project#developer
+         * @methodOf lbServices.Project
+         *
+         * @description
+         *
+         * Fetches belongsTo relation developer
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Developer` object.)
+         * </em>
+         */
+        R.developer = function() {
+          var TargetResource = $injector.get("Developer");
+          var action = TargetResource["::get::Project::developer"];
+          return action.apply(R, arguments);
+        };
     /**
      * @ngdoc object
      * @name lbServices.Project.checkPoints
@@ -5033,6 +5081,49 @@ module.factory(
         // INTERNAL. Use CheckPoint.project() instead.
         "prototype$__get__project": {
           url: urlBase + "/CheckPoints/:id/project",
+          method: "GET"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.findById() instead.
+        "prototype$__findById__sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.destroyById() instead.
+        "prototype$__destroyById__sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.updateById() instead.
+        "prototype$__updateById__sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints() instead.
+        "prototype$__get__sessionCheckPoints": {
+          isArray: true,
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints",
+          method: "GET"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.create() instead.
+        "prototype$__create__sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints",
+          method: "POST"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.destroyAll() instead.
+        "prototype$__delete__sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.count() instead.
+        "prototype$__count__sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/count",
           method: "GET"
         },
 
@@ -5595,6 +5686,269 @@ module.factory(
         R.project = function() {
           var TargetResource = $injector.get("Project");
           var action = TargetResource["::get::CheckPoint::project"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.CheckPoint.sessionCheckPoints
+     * @header lbServices.CheckPoint.sessionCheckPoints
+     * @object
+     * @description
+     *
+     * The object `CheckPoint.sessionCheckPoints` groups methods
+     * manipulating `SessionCheckPoint` instances related to `CheckPoint`.
+     *
+     * Call {@link lbServices.CheckPoint#sessionCheckPoints CheckPoint.sessionCheckPoints()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint#sessionCheckPoints
+         * @methodOf lbServices.CheckPoint
+         *
+         * @description
+         *
+         * Queries sessionCheckPoints of CheckPoint.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SessionCheckPoint` object.)
+         * </em>
+         */
+        R.sessionCheckPoints = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::get::CheckPoint::sessionCheckPoints"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint.sessionCheckPoints#count
+         * @methodOf lbServices.CheckPoint.sessionCheckPoints
+         *
+         * @description
+         *
+         * Counts sessionCheckPoints of CheckPoint.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.sessionCheckPoints.count = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::count::CheckPoint::sessionCheckPoints"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint.sessionCheckPoints#create
+         * @methodOf lbServices.CheckPoint.sessionCheckPoints
+         *
+         * @description
+         *
+         * Creates a new instance in sessionCheckPoints of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SessionCheckPoint` object.)
+         * </em>
+         */
+        R.sessionCheckPoints.create = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::create::CheckPoint::sessionCheckPoints"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint.sessionCheckPoints#destroyAll
+         * @methodOf lbServices.CheckPoint.sessionCheckPoints
+         *
+         * @description
+         *
+         * Deletes all sessionCheckPoints of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.sessionCheckPoints.destroyAll = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::delete::CheckPoint::sessionCheckPoints"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint.sessionCheckPoints#destroyById
+         * @methodOf lbServices.CheckPoint.sessionCheckPoints
+         *
+         * @description
+         *
+         * Delete a related item by id for sessionCheckPoints
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sessionCheckPoints
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.sessionCheckPoints.destroyById = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::destroyById::CheckPoint::sessionCheckPoints"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint.sessionCheckPoints#findById
+         * @methodOf lbServices.CheckPoint.sessionCheckPoints
+         *
+         * @description
+         *
+         * Find a related item by id for sessionCheckPoints
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sessionCheckPoints
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SessionCheckPoint` object.)
+         * </em>
+         */
+        R.sessionCheckPoints.findById = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::findById::CheckPoint::sessionCheckPoints"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CheckPoint.sessionCheckPoints#updateById
+         * @methodOf lbServices.CheckPoint.sessionCheckPoints
+         *
+         * @description
+         *
+         * Update a related item by id for sessionCheckPoints
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sessionCheckPoints
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SessionCheckPoint` object.)
+         * </em>
+         */
+        R.sessionCheckPoints.updateById = function() {
+          var TargetResource = $injector.get("SessionCheckPoint");
+          var action = TargetResource["::updateById::CheckPoint::sessionCheckPoints"];
           return action.apply(R, arguments);
         };
 
@@ -6837,6 +7191,49 @@ module.factory(
         "prototype$updateAttributes": {
           url: urlBase + "/SessionCheckPoints/:id",
           method: "PUT"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.findById() instead.
+        "::findById::CheckPoint::sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.destroyById() instead.
+        "::destroyById::CheckPoint::sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.updateById() instead.
+        "::updateById::CheckPoint::sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints() instead.
+        "::get::CheckPoint::sessionCheckPoints": {
+          isArray: true,
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints",
+          method: "GET"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.create() instead.
+        "::create::CheckPoint::sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints",
+          method: "POST"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.destroyAll() instead.
+        "::delete::CheckPoint::sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use CheckPoint.sessionCheckPoints.count() instead.
+        "::count::CheckPoint::sessionCheckPoints": {
+          url: urlBase + "/CheckPoints/:id/sessionCheckPoints/count",
+          method: "GET"
         },
 
         // INTERNAL. Use Session.sessionCheckPoints.findById() instead.
