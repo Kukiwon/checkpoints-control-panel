@@ -1,0 +1,14 @@
+#main {
+	.sign-up {
+		background-color: $yellow;
+		border: 2px solid black;
+		&:hover {
+			background-color: darken($yellow, 5);
+			border: 2px solid black;
+			color: black;
+		}
+	}
+	.column {
+		text-align: center;
+	}
+}

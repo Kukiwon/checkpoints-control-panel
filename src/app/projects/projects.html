@@ -1,5 +1,5 @@
 <div class="container" ng-init="init()">
-	<button class="btn btn-default pull-right" ng-click="create()">Create Project</button>
+	<button class="btn btn-primary pull-right" ng-click="create()">Create Project</button>
 	<h1>Projects</h1>
 	<hr>
 	<table class="table table-striped">
@@ -21,6 +21,9 @@
 				<button class="btn btn-default" ng-click="view(project)"><i class="glyphicon glyphicon-eye-open"></i></button>
 				<button class="btn btn-danger" ng-click="delete(project)"><i class="glyphicon glyphicon-trash"></i></button>
 			</td>
+		</tr>
+		<tr ng-if="!projects.length">
+			<td colspan="10">No projects found. Click "Create Project" to create a new project.</td>
 		</tr>
 	</table>
 </div>

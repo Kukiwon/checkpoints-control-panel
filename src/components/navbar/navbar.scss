@@ -1,0 +1,15 @@
+.navbar {
+	background-color: $yellow;
+	border-bottom: 2px solid black;
+	
+	ul {
+		li {
+			a {
+				color: black !important;
+			}
+			&:first-of-type {
+				font-weight: bold !important;
+			}
+		}
+	}
+}

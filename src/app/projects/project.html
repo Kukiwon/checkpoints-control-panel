@@ -1,12 +1,13 @@
 <div class="container" ng-init="init()">
-	<button class="btn btn-default pull-right" ng-click="createCheckpoint()">Create Checkpoint</button>
-	<h1>{{project.name}} <span style="color:red">[{{project.id}}]</span></h1>
+	<button class="btn btn-primary pull-right" ng-click="createCheckpoint()">Create Checkpoint</button>
+	<h1>{{project.name}}</h1>
+	<pre><b>ID</b> {{project.id}}</pre>
 	<hr>
-	<p>
+	<!-- <p>
 		Now that you have created a project, you need to initialize it in the SDK to start tracking Check Points.
 		In the iOS SDK, add the following line of code to your project:
 	</p>
-	<pre>[[NPSCheckpoints SDK] initWithUsername:@"test@example.com" andPassword:@"test" andProjectId:@"{{project.id}}"];</pre>
+	<pre>[[NPSCheckpoints SDK] initWithUsername:@"test@example.com" andPassword:@"test" andProjectId:@"{{project.id}}"];</pre> -->
 
 	<h2>Checkpoints</h2>
 	<table class="table table-striped">
@@ -14,31 +15,48 @@
 			<th>ID</th>
 			<th>Checkpoint</th>
 			<th>Created</th>
+			<th style="width:100px;"></th>
 		</tr>
 		<tr ng-repeat="checkpoint in project.checkPoints | orderBy:'id'">
-			<td style="color:red;">{{checkpoint.id}}</td>
+			<td>{{checkpoint.id}}</td>
 			<td>{{checkpoint.name}}</td>
-			<td>{{checkpoint.created | date:'short'}}
+			<td>{{checkpoint.created | date:'short'}}</td>
+			<td>
+				<button class="btn btn-danger" ng-click="deleteCheckpoint(checkpoint)"><i class="glyphicon glyphicon-trash"></i></button>
+			</td>
+		</tr>
+		<tr ng-if="!project.checkPoints.length">
+			<td colspan="10">No checkpoints found. Define a new Checkpoint by clicking 'Create Checkpoint' in the upper right corner.</td>
 		</tr>
 	</table>
 	<h2>Sessions</h2>
-	<table class="table table-striped">
+	<table class="table table-striped" ng-class="{disabled: !project.sessions.length}">
 		<tr>
 			<th>Session Identifier</th>
 			<th>Checkpoint</th>
 			<th>Created</th>
+			<th style="width: 100px;"></th>
 		</tr>
 		<tbody ng-repeat="session in project.sessions | orderBy:'id'">
 			<tr>
 				<td>{{session.identifier}}</td>
 				<td></td>
-				<td>{{session.created | date:'medium'}}
+				<td>{{session.created | date:'medium'}}</td>
+				<td>
+					<button class="btn btn-danger" ng-click="deleteSession(session)"><i class="glyphicon glyphicon-trash"></i></button>
+				</td>
 			</tr>
 			<tr ng-repeat="sessionCheckPoint in session.sessionCheckPoints">
 				<td></td>
 				<td>{{sessionCheckPoint.checkPoint.name}}</td>
 				<td>{{sessionCheckPoint.created | date:'medium'}}</td>
+				<td></td>
 			</tr>
 		</td>
+		<tbody ng-if="!project.sessions.length">
+			<tr>
+				<td colspan="10">No Sessions found. Sessions are automatically created when your app is set up correctly and the SDK is initialized.</td>
+			</tr>
+		</tbody>
 	</table>
 </div>

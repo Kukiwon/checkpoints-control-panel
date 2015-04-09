@@ -1,9 +1,6 @@
 angular.module "checkpoints"
   .controller "SignInCtrl", ($scope, $state, AuthService) ->
-    $scope.user = {
-      email: 'jordy@foove.nl'
-      password: 'test123'
-    }
+    $scope.user = {}
     $scope.signIn = (user) ->
       AuthService.login user.email, user.password
       .then (response) ->

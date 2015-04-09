@@ -34,7 +34,8 @@ angular.module "checkpoints", ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize'
         templateUrl: "app/checkpoints/create.html",
         controller: "CheckpointCtrl"
 
-    LoopBackResourceProvider.setUrlBase 'http://localhost:3030/api'
+    LoopBackResourceProvider.setUrlBase 'http://localhost:8081/api'
+    #LoopBackResourceProvider.setUrlBase '/api'
 
     $urlRouterProvider.otherwise '/'
 
